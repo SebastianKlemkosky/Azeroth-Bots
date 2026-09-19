@@ -72,7 +72,6 @@ pause
 exit /b 1
 
 
-
 REM ==================================================
 REM STEP 2 - Stop AuthServer
 REM ==================================================
@@ -126,7 +125,6 @@ pause
 exit /b 1
 
 
-
 REM ==================================================
 REM STEP 3 - Make sure MySQL is running
 REM ==================================================
@@ -155,7 +153,6 @@ if errorlevel 1 (
 
 echo [OK] MySQL84 is running.
 echo.
-
 
 
 REM ==================================================
@@ -192,7 +189,6 @@ echo [OK] AuthServer port %AUTH_PORT% is open.
 echo.
 
 
-
 REM ==================================================
 REM STEP 5 - Start WorldServer
 REM ==================================================
@@ -227,12 +223,11 @@ echo [OK] WorldServer port %WORLD_PORT% is open.
 echo.
 
 
-
 REM ==================================================
 REM STEP 6 - Wait for SOAP
 REM ==================================================
 
-echo [INFO] Waiting for SOAP port 7878...
+echo [INFO] Waiting for SOAP port %SOAP_PORT%...
 
 set /a WAIT_COUNT=0
 
@@ -240,7 +235,7 @@ set /a WAIT_COUNT=0
 :WAIT_SOAP
 
 powershell -NoProfile -Command ^
-    "if (Test-NetConnection -ComputerName '127.0.0.1' -Port 7878 -InformationLevel Quiet -WarningAction SilentlyContinue) { exit 0 } else { exit 1 }"
+    "if (Test-NetConnection -ComputerName '127.0.0.1' -Port %SOAP_PORT% -InformationLevel Quiet -WarningAction SilentlyContinue) { exit 0 } else { exit 1 }"
 
 if not errorlevel 1 goto SERVER_READY
 
@@ -252,14 +247,13 @@ timeout /t 1 /nobreak >nul
 goto WAIT_SOAP
 
 
-
 REM ==================================================
 REM COMPLETE
 REM ==================================================
 
 :SERVER_READY
 
-echo [OK] SOAP port 7878 is open.
+echo [OK] SOAP port %SOAP_PORT% is open.
 
 echo.
 echo ============================================
@@ -273,7 +267,7 @@ echo.
 echo Server IP:    %SERVER_IP%
 echo Auth Port:    %AUTH_PORT%
 echo World Port:   %WORLD_PORT%
-echo SOAP Port:    7878
+echo SOAP Port:    %SOAP_PORT%
 echo.
 echo Playerbots will continue logging in after
 echo WorldServer finishes initialization.
@@ -284,7 +278,6 @@ echo.
 pause
 endlocal
 exit /b 0
-
 
 
 REM ==================================================
@@ -320,7 +313,7 @@ exit /b 1
 :SOAP_TIMEOUT
 
 echo.
-echo [ERROR] SOAP did not open port 7878
+echo [ERROR] SOAP did not open port %SOAP_PORT%
 echo within 120 seconds.
 echo.
 echo WorldServer may still be loading or may have

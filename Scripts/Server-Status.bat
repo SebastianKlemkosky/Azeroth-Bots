@@ -9,6 +9,7 @@ echo          AzerothCore Server Status
 echo ============================================
 echo.
 
+
 REM ==================================================
 REM MySQL
 REM ==================================================
@@ -20,6 +21,7 @@ if errorlevel 1 (
 ) else (
     echo MySQL84:       RUNNING
 )
+
 
 REM ==================================================
 REM AuthServer
@@ -35,6 +37,7 @@ if errorlevel 1 (
     set "AUTH_RUNNING=1"
 )
 
+
 REM ==================================================
 REM WorldServer
 REM ==================================================
@@ -49,6 +52,7 @@ if errorlevel 1 (
     set "WORLD_RUNNING=1"
 )
 
+
 echo.
 echo ============================================
 echo              Network Status
@@ -58,12 +62,12 @@ echo.
 echo Server IP:      %SERVER_IP%
 echo Auth Port:      %AUTH_PORT%
 echo World Port:     %WORLD_PORT%
-echo SOAP Port:      7878
+echo SOAP Port:      %SOAP_PORT%
 echo.
 
 call :CHECK_PORT "AuthServer" 127.0.0.1 %AUTH_PORT%
 call :CHECK_PORT "WorldServer" 127.0.0.1 %WORLD_PORT%
-call :CHECK_PORT "SOAP" 127.0.0.1 7878
+call :CHECK_PORT "SOAP" 127.0.0.1 %SOAP_PORT%
 
 echo.
 echo ============================================
