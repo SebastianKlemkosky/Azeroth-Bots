@@ -158,9 +158,9 @@ echo [INFO] Build directory does not exist.
 echo [INFO] Creating:
 echo %AC_BUILD%
 
-```
+
 mkdir "%AC_BUILD%"
-```
+
 
 )
 
