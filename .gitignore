@@ -181,3 +181,9 @@ private/
 # -------------------------
 Installs/
 AzerothCore/
+
+# -------------------------
+# Local Secrets
+# -------------------------
+scripts/soap-secrets.txt
+scripts/server-env.bat
