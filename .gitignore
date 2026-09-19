@@ -1,0 +1,182 @@
+# =========================================================
+# AzerothCore Bots Project
+# =========================================================
+
+# -------------------------
+# Operating System
+# -------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -------------------------
+# Visual Studio
+# -------------------------
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+
+# -------------------------
+# VS Code
+# -------------------------
+.vscode/
+*.code-workspace
+
+# -------------------------
+# CMake
+# -------------------------
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Common build folders
+build/
+Build/
+BUILD/
+bin/
+obj/
+out/
+
+# -------------------------
+# Compiled Files
+# -------------------------
+*.exe
+*.dll
+*.lib
+*.pdb
+*.exp
+*.ilk
+*.obj
+*.o
+*.so
+*.dylib
+
+# -------------------------
+# AzerothCore Runtime
+# -------------------------
+logs/
+Logs/
+*.log
+
+# Server crash files
+*.dmp
+*.core
+
+# PID / runtime files
+*.pid
+
+# -------------------------
+# AzerothCore Config Files
+# -------------------------
+# Keep .dist configuration templates,
+# but do not commit your actual local configs.
+
+authserver.conf
+worldserver.conf
+
+*.conf.local
+
+# -------------------------
+# Secrets / Environment
+# -------------------------
+.env
+.env.*
+!.env.example
+
+secrets/
+credentials/
+
+# -------------------------
+# MySQL / Database
+# -------------------------
+*.sql
+*.sql.gz
+*.dump
+*.bak
+
+mysql/
+database/
+db-backups/
+backups/
+
+# -------------------------
+# WoW 3.3.5 Client
+# -------------------------
+# Never commit the actual WoW client/data.
+
+WoW/
+wow/
+World of Warcraft/
+Client/
+
+*.MPQ
+*.mpq
+
+# -------------------------
+# AzerothCore Extracted Data
+# -------------------------
+dbc/
+maps/
+vmaps/
+mmaps/
+cameras/
+gt/
+
+# -------------------------
+# Temporary Files
+# -------------------------
+tmp/
+temp/
+*.tmp
+*.temp
+*.cache
+
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+
+venv/
+.venv/
+env/
+
+# -------------------------
+# Node / Web Overseer UI
+# -------------------------
+node_modules/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+dist/
+.next/
+coverage/
+
+# -------------------------
+# IDE / Editor Backups
+# -------------------------
+*.swp
+*.swo
+*~
+*.bak
+
+# -------------------------
+# Local project settings
+# -------------------------
+local/
+private/
+
+# -------------------------
+# Local project folders
+# -------------------------
+Installs/
