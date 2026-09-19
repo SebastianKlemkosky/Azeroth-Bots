@@ -660,7 +660,7 @@ Characters in world: 500
 The main management utility is:
 
 ```text
-scripts\Azeroth-Bots.bat
+Server-Tools\Azeroth-Bots.bat
 ```
 
 Current options:
@@ -680,13 +680,13 @@ Current options:
 Shared environment configuration is stored in:
 
 ```text
-scripts\server-env.bat
+Server-Tools\server-env.bat
 ```
 
 SOAP commands are sent through:
 
 ```text
-scripts\Send-AcoreCommand.ps1
+Server-Tools\Send-AcoreCommand.ps1
 ```
 
 Credentials must remain outside Git.

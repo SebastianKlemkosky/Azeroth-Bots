@@ -185,5 +185,5 @@ AzerothCore/
 # -------------------------
 # Local Secrets
 # -------------------------
-scripts/soap-secrets.txt
-scripts/server-env.bat
+Server-Tools/soap-secrets.txt
+Server-Tools/server-env.bat
