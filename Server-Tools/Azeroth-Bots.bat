@@ -1,9 +1,40 @@
 @echo off
 setlocal
-title Azeroth Bots - Control Center
 
 call "%~dp0server-env.bat"
 
+REM ==================================================
+REM Get this script's directory without trailing slash
+REM ==================================================
+
+for %%I in ("%~dp0.") do set "CONTROL_DIR=%%~fI"
+
+
+REM ==================================================
+REM Launch control center inside dedicated
+REM Azeroth Bots Windows Terminal window
+REM ==================================================
+
+if /I not "%~1"=="--terminal" (
+
+    where wt.exe >nul 2>&1
+
+    if errorlevel 1 (
+        echo.
+        echo [ERROR] Windows Terminal ^(wt.exe^) was not found.
+        echo.
+        pause
+        exit /b 1
+    )
+
+    wt -w AzerothBots new-tab ^
+        --title "Azeroth Bots - Control" ^
+        --suppressApplicationTitle ^
+        --startingDirectory "%CONTROL_DIR%" ^
+        cmd.exe /d /c call Azeroth-Bots.bat --terminal
+
+    exit /b 0
+)
 
 :MENU
 

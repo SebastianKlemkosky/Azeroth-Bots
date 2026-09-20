@@ -181,9 +181,14 @@ private/
 # -------------------------
 Installs/
 AzerothCore/
+Vanilla/
 
 # -------------------------
 # Local Secrets
 # -------------------------
 Server-Tools/soap-secrets.txt
 Server-Tools/server-env.bat
+# -------------------------
+# Ignore Telemetry config file
+# -------------------------
+Telemetry/config.json

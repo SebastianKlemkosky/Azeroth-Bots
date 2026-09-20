@@ -46,6 +46,26 @@ echo.
 
 
 REM ==================================================
+REM Check Windows Terminal
+REM ==================================================
+
+where wt.exe >nul 2>&1
+
+if errorlevel 1 (
+    echo [ERROR] Windows Terminal ^(wt.exe^) was not found.
+    echo.
+    echo Windows Terminal is required to launch the
+    echo server processes in separate tabs.
+    echo.
+    pause
+    exit /b 1
+)
+
+echo [OK] Windows Terminal found.
+echo.
+
+
+REM ==================================================
 REM STEP 2 - Check MySQL
 REM ==================================================
 
@@ -84,9 +104,13 @@ tasklist /FI "IMAGENAME eq authserver.exe" | find /I "authserver.exe" >nul
 if not errorlevel 1 (
     echo [INFO] AuthServer is already running.
 ) else (
-    echo [INFO] Starting AuthServer...
+    echo [INFO] Starting AuthServer in Windows Terminal...
 
-    start "AzerothCore - AuthServer" /D "%AC_BIN%" authserver.exe
+    wt -w AzerothBots new-tab ^
+        --title "AzerothCore - AuthServer" ^
+        --suppressApplicationTitle ^
+        -d "%AC_BIN%" ^
+        cmd /c authserver.exe
 )
 
 echo [INFO] Waiting for AuthServer port %AUTH_PORT%...
@@ -124,9 +148,13 @@ tasklist /FI "IMAGENAME eq worldserver.exe" | find /I "worldserver.exe" >nul
 if not errorlevel 1 (
     echo [INFO] WorldServer is already running.
 ) else (
-    echo [INFO] Starting WorldServer...
+    echo [INFO] Starting WorldServer in Windows Terminal...
 
-    start "AzerothCore - WorldServer" /D "%AC_BIN%" worldserver.exe
+    wt -w AzerothBots new-tab ^
+        --title "AzerothCore - WorldServer" ^
+        --suppressApplicationTitle ^
+        -d "%AC_BIN%" ^
+        cmd /c worldserver.exe
 )
 
 echo [INFO] Waiting for WorldServer port %WORLD_PORT%...
@@ -210,6 +238,27 @@ if errorlevel 1 (
 
 
 REM ==================================================
+REM STEP 7 - Start Telemetry
+REM ==================================================
+
+echo [INFO] Starting telemetry...
+
+call "%~dp0Start-Telemetry.bat"
+
+if errorlevel 1 (
+    echo.
+    echo [WARNING] AzerothCore started successfully,
+    echo but telemetry failed to start.
+    echo.
+    set "TELEMETRY_STATUS=FAILED"
+) else (
+    echo [OK] Telemetry is running.
+    echo.
+    set "TELEMETRY_STATUS=RUNNING"
+)
+
+
+REM ==================================================
 REM COMPLETE
 REM ==================================================
 
@@ -220,6 +269,7 @@ echo.
 echo MySQL84:      RUNNING
 echo AuthServer:   RUNNING
 echo WorldServer:  RUNNING
+echo Telemetry:    %TELEMETRY_STATUS%
 echo.
 echo Server IP:    %SERVER_IP%
 echo Auth Port:    %AUTH_PORT%
@@ -255,7 +305,7 @@ echo.
 echo [ERROR] AuthServer did not open port %AUTH_PORT%
 echo within 30 seconds.
 echo.
-echo Check the AuthServer window for errors.
+echo Check the AuthServer tab for errors.
 echo.
 pause
 endlocal
@@ -272,7 +322,7 @@ echo.
 echo [ERROR] WorldServer did not open port %WORLD_PORT%
 echo within 120 seconds.
 echo.
-echo Check the WorldServer window for errors.
+echo Check the WorldServer tab for errors.
 echo.
 pause
 endlocal
@@ -292,7 +342,7 @@ echo.
 echo WorldServer may still be loading or SOAP may
 echo not be enabled.
 echo.
-echo Check worldserver.conf and the WorldServer window.
+echo Check worldserver.conf and the WorldServer tab.
 echo.
 pause
 endlocal
